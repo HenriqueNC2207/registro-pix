@@ -1,0 +1,72 @@
+{
+  "individualResults": [
+    {
+      "initialSchemaVersion": "20230308",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.21.1",
+      "database": "library-api",
+      "warnings": [
+        "outOfOrder mode is active. Migration of schema \"public\" may not be reproducible."
+      ],
+      "timestamp": "2023-08-23T22:26:40.023301300",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "20230308",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.21.1",
+      "database": "library-api",
+      "warnings": [
+        "outOfOrder mode is active. Migration of schema \"public\" may not be reproducible."
+      ],
+      "timestamp": "2023-08-23T22:30:49.424483800",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "20230308",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.21.1",
+      "database": "library-api",
+      "warnings": [
+        "outOfOrder mode is active. Migration of schema \"public\" may not be reproducible."
+      ],
+      "timestamp": "2023-08-23T22:31:45.010655700",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    },
+    {
+      "initialSchemaVersion": "20230308",
+      "targetSchemaVersion": null,
+      "schemaName": "",
+      "migrations": [],
+      "migrationsExecuted": 0,
+      "success": true,
+      "flywayVersion": "9.21.1",
+      "database": "library-api",
+      "warnings": [
+        "outOfOrder mode is active. Migration of schema \"public\" may not be reproducible."
+      ],
+      "timestamp": "2023-08-23T22:34:28.841550",
+      "operation": "migrate",
+      "exception": null,
+      "licenseFailed": false
+    }
+  ]
+}
