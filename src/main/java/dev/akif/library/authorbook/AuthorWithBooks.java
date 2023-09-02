@@ -3,7 +3,6 @@ package dev.akif.library.authorbook;
 import dev.akif.crud.CRUDModel;
 import dev.akif.library.author.Author;
 import dev.akif.library.book.Book;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.Instant;

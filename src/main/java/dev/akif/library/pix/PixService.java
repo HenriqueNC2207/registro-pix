@@ -35,6 +35,9 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
             if (existingPixOptional.isPresent()) {
 
                 PixEntity existingPix = existingPixOptional.get();
+                if(existingPix.getDeletedAt() != null){
+                    return "Chave Pix desativada!";
+                }
                 pixEntity.setId(id);
                 pixEntity.setCreatedAt(existingPix.getCreatedAt());
                 pixEntity.setTipoChave(existingPix.getTipoChave());
@@ -254,26 +257,7 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
     }
 
     @Override
-    protected int updateUsingRepository(PixEntity arg0, Parameters arg1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUsingRepository'");
-    }
-    private PixEntity removeNullFields(PixEntity pixEntity) {
-        PixEntity updatedEntity = new PixEntity();
-        
-        
-         updatedEntity.setId(pixEntity.getId());
-         updatedEntity.setTipoChave(pixEntity.getTipoChave());
-         updatedEntity.setValorChave(pixEntity.getValorChave());
-         updatedEntity.setTipoConta(pixEntity.getTipoConta());
-         updatedEntity.setNumAgencia(pixEntity.getNumAgencia());
-         updatedEntity.setNumConta(pixEntity.getNumConta());
-         updatedEntity.setNomeCorrentista(pixEntity.getNomeCorrentista());
-         updatedEntity.setSobrenomeCorrentista(pixEntity.getSobrenomeCorrentista());
-         updatedEntity.setTipoPessoa(pixEntity.getTipoPessoa());
-
-        // Copy other fields similarly
-        
-        return updatedEntity;
+    protected int updateUsingRepository(final PixEntity pixEntity, final Parameters parameters) {
+        return getRepository().update(pixEntity);
     }
 }
