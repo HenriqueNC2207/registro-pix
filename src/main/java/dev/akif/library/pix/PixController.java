@@ -109,9 +109,9 @@ public class PixController extends CRUDController<
         if (updatedPix instanceof PixEntity) {
             PixEntity updatedEntity = (PixEntity) updatedPix;
             if (updatedEntity.getId() == null) {
-                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Alterações cedidas não respeitaram as condições necessárias." + updatedPix.toString());
+                return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body("Alterações solicitadas não respeitaram as condições necessárias." + updatedPix.toString());
             }
-            return ResponseEntity.ok("Chave Pix criado com sucesso. Id da chave é :" + updatedEntity.getId().toString());
+            return ResponseEntity.ok("Chave Pix alterada com sucesso com sucesso. Id da chave é :" + updatedEntity.getId().toString());
         
         } else if (updatedPix instanceof String) {
             // Handle validation message
