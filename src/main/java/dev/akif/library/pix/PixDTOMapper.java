@@ -38,9 +38,8 @@ public class PixDTOMapper implements CRUDDTOMapper<UUID, Pix, PixDTO, CreatePix,
 
 
     @Override
-    public UpdatePix updateDTOToUpdateModel(UpdatePixDTO arg0, Parameters arg1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateDTOToUpdateModel'");
+    public UpdatePix updateDTOToUpdateModel(final UpdatePixDTO updatePixDTO, final Parameters parameters) {
+        return new UpdatePix( updatePixDTO.tipoConta(), updatePixDTO.numAgencia(), updatePixDTO.numConta(),updatePixDTO.nomeCorrentista(),updatePixDTO.sobrenomeCorrentista(),updatePixDTO.tipoPessoa());
     }
 
 

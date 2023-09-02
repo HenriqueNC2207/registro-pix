@@ -13,12 +13,19 @@ public class PixMapper implements CRUDMapper<UUID, PixEntity, Pix, CreatePix, Up
     public PixEntity entityToBeCreatedFrom(final CreatePix createPix, final Instant now) {
         return new PixEntity(createPix.tipoChave(), createPix.valorChave(), createPix.tipoConta(), createPix.numAgencia(), createPix.numConta(), createPix.nomeCorrentista(), createPix.sobrenomeCorrentista(), createPix.tipoPessoa(), now);
     }
+    public PixEntity entityToBeUpdateEntity(final UpdatePix updatePix, final Instant now) {
+        return new PixEntity( null, null,updatePix.tipoConta(), updatePix.numAgencia(), updatePix.numConta(), updatePix.nomeCorrentista(), updatePix.sobrenomeCorrentista(), updatePix.tipoPessoa(),  now);
+    }
 
 
     @Override
-    public void updateEntityWith(PixEntity arg0, UpdatePix arg1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateEntityWith'");
+    public void updateEntityWith(final PixEntity pixEntity, final UpdatePix updatePix) {
+        pixEntity.setTipoConta(updatePix.tipoConta());
+        pixEntity.setNumAgencia(updatePix.numAgencia());
+        pixEntity.setNumConta(updatePix.numConta());
+        pixEntity.setNomeCorrentista(updatePix.nomeCorrentista());
+        pixEntity.setSobrenomeCorrentista(updatePix.sobrenomeCorrentista());
+        pixEntity.setTipoPessoa(updatePix.tipoPessoa());
     }
 
 

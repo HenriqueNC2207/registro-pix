@@ -4,6 +4,8 @@ import dev.akif.crud.CRUDService;
 import dev.akif.crud.common.InstantProvider;
 import dev.akif.crud.common.Parameters;
 
+import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -23,6 +25,31 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
         }
         return retornoValidacao.toString();
         
+    }
+
+    protected Object updatePix(final PixEntity pixEntity, final Parameters parameters, UUID id) {
+        Object retornoValidacao = validaAlteracaoPix(pixEntity);
+        // Encontra o objeto existente no banco de dados
+        Optional<PixEntity> existingPixOptional = getRepository().findById(id);
+        if(retornoValidacao == null){
+            if (existingPixOptional.isPresent()) {
+
+                PixEntity existingPix = existingPixOptional.get();
+                pixEntity.setId(id);
+                pixEntity.setCreatedAt(existingPix.getCreatedAt());
+                pixEntity.setTipoChave(existingPix.getTipoChave());
+                pixEntity.setValorChave(existingPix.getValorChave());
+                Instant now = Instant.now();
+                pixEntity.setUpdatedAt(now);
+
+                return getRepository().save(pixEntity);
+            } else {
+                // Lida com a situação em que o objeto com o ID fornecido não existe
+                // Pode lançar uma exceção ou retornar null, dependendo da sua lógica
+                return null;
+            }
+        }
+        return retornoValidacao.toString();
     }
 
     public Boolean verificarCPF (String cpf) {
@@ -135,6 +162,7 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
         if(validarDuplicados(pixEntity.getValorChave()) ){
             if(pixEntity.getTipoPessoa().equals("J") || pixEntity.getTipoPessoa().equals("F")){
                 if(validaQtdChavesConta(pixEntity)){
+                    if(pixEntity.getTipoConta().equals("corrente") || pixEntity.getTipoConta().equals("poupança")){
             switch(pixEntity.getTipoChave()){
             case "cpf":
                 if(verificarCPF(pixEntity.getValorChave())){
@@ -170,9 +198,29 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
         }
         else{
             return "Erro na verificação, chave pix duplicada:  " +  pixEntity.getValorChave();
+        } 
+        }
+        else {
+            return "Erro na verificação, tipo de conta deve ser ou corrente ou poupança:  " +  pixEntity.getTipoConta();
         }
        
         return null;
+        
+    }
+    public Object validaAlteracaoPix (final PixEntity pixEntity){
+
+        if(pixEntity.getTipoPessoa().equals("J") || pixEntity.getTipoPessoa().equals("F")){
+                    if(pixEntity.getTipoConta().equals("corrente") || pixEntity.getTipoConta().equals("poupança")){ 
+                        return null;  
+                    }
+                    else{
+                        return "Erro na verificação, tipo de pessoa precisa ser J ou F" +  pixEntity.getTipoPessoa();
+                    }
+        } 
+        else {
+            return "Erro na verificação, tipo de conta deve ser ou corrente ou poupança:  " +  pixEntity.getTipoConta();
+        }
+       
         
     }
 
@@ -187,16 +235,11 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
     
 
     @Override
-    protected PixEntity getUsingRepository(UUID arg0, Parameters arg1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsingRepository'");
+    protected PixEntity getUsingRepository(final UUID id, final Parameters parameters) {
+        return getRepository().findByIdAndDeletedAtIsNull(id);
     }
 
-    @Override
-    protected int updateUsingRepository(PixEntity arg0, Parameters arg1) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUsingRepository'");
-    }
+
 
 
     @Override
@@ -208,5 +251,29 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
     protected PixEntity createUsingRepository(PixEntity arg0, Parameters arg1) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createUsingRepository'");
+    }
+
+    @Override
+    protected int updateUsingRepository(PixEntity arg0, Parameters arg1) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateUsingRepository'");
+    }
+    private PixEntity removeNullFields(PixEntity pixEntity) {
+        PixEntity updatedEntity = new PixEntity();
+        
+        
+         updatedEntity.setId(pixEntity.getId());
+         updatedEntity.setTipoChave(pixEntity.getTipoChave());
+         updatedEntity.setValorChave(pixEntity.getValorChave());
+         updatedEntity.setTipoConta(pixEntity.getTipoConta());
+         updatedEntity.setNumAgencia(pixEntity.getNumAgencia());
+         updatedEntity.setNumConta(pixEntity.getNumConta());
+         updatedEntity.setNomeCorrentista(pixEntity.getNomeCorrentista());
+         updatedEntity.setSobrenomeCorrentista(pixEntity.getSobrenomeCorrentista());
+         updatedEntity.setTipoPessoa(pixEntity.getTipoPessoa());
+
+        // Copy other fields similarly
+        
+        return updatedEntity;
     }
 }
