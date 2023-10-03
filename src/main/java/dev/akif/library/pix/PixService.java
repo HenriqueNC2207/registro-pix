@@ -191,20 +191,20 @@ public class PixService extends CRUDService<UUID, PixEntity,Pix, CreatePix, Upda
         }
         }
         else{
-            return "Erro na verificação, Conta já possui o limite de  chaves cadastradas, limite de chaves para conta: " +  limite;
+            return "Erro na verificação, tipo de conta deve ser ou corrente ou poupança:  " +  pixEntity.getTipoConta();
         }
         }
         else{
-            return "Erro na verificação, tipo de pessoa precisa ser J ou F" +  pixEntity.getTipoPessoa();
+            return "Erro na verificação, Conta já possui o limite de  chaves cadastradas, limite de chaves para conta: " +  limite; 
         }
         
         }
         else{
-            return "Erro na verificação, chave pix duplicada:  " +  pixEntity.getValorChave();
+            return "Erro na verificação, tipo de pessoa precisa ser J ou F" +  pixEntity.getTipoPessoa();
         } 
         }
         else {
-            return "Erro na verificação, tipo de conta deve ser ou corrente ou poupança:  " +  pixEntity.getTipoConta();
+            return "Erro na verificação, chave pix duplicada:  " +  pixEntity.getValorChave();
         }
        
         return null;
