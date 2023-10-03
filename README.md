@@ -1,20 +1,3 @@
-# Library API
-
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Configuration](#configuration)
-3. [Local Development](#local-development)
-4. [Docker](#docker)
-5. [API](#api-docs)
-6. [Contributing](#contributing)
-7. [License](#license)
-
-## Introduction
-
-Library API is a web backend application. It provides CRUD APIs to manage authors and books.
-
-It uses
 
 * Gradle 8 for builds
 * Spring Boot 3 for web backend
@@ -71,10 +54,3 @@ If you are running on a different host platform and get image related errors dur
 
 Library API provides OpenAPI documentation and a Swagger UI to browse them. After running the application, you may go to [/swagger-ui.html](http://localhost:8080/swagger-ui.html) to launch Swagger UI.
 
-## Contributing
-
-All contributions are welcome. Please feel free to send a pull request. Thank you.
-
-## License
-
-Library API is licensed with [MIT License](LICENSE).
