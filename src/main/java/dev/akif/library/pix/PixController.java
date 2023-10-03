@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -38,14 +37,14 @@ public class PixController extends CRUDController<
 
     private final PixService pixService;
     private final PixMapper pixMapper;
-     private final PixDTOMapper pixDTOMapper;
+    private final PixDTOMapper pixDTOMapper;
     public PixController(final PixService service, final PixDTOMapper pixDTOMapper, final PixMapper pixMapper) {
         super("Pix", service, pixDTOMapper);
         this.pixService = service;
         this.pixMapper = pixMapper;
         this.pixDTOMapper = pixDTOMapper;
     }
-    private static final String LIST_BOOKS_SUMMARY = "List books of author";
+    private static final String LIST_BOOKS_SUMMARY = "Criação de chave pix";
     private static final String LIST_BOOKS_DESCRIPTION = "End point para crição de chave pix";
     private static final String LIST_BOOKS_RESPONSE = "Chave pix criada.";
 
